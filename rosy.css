@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background: url('img/Rosy.jpg') no-repeat center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav a:hover {
+    color: #ddd;
+}
+
