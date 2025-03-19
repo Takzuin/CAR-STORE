@@ -3,67 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Old Style - Tienda de Autos</title>
+    <title>Old Style - Tienda de Autos Clásicos</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
     <nav class="nav">
-        <div class="logo">Old Style</div>
+        <div class="logo">
+            <img src="img/logo.jpg" alt="Old Cars Logo" class="logo-image">
+            <span>Old Style</span>
+        </div>
         <ul>
             <li><a href="#supra-section">Modelos</a></li>
             <li><a href="inventario.html">Inventario</a></li>
-            <li><a href="segunda-mano.html">Segunda mano</a></li>
+            <li><a href="#second-hand-section">Segunda mano</a></li>
             <li><a href="rosy.html">Soporte</a></li>
         </ul>
     </nav>
 
     <section class="hero">
-        <h1>Old Style</h1>
-        <p>Clásicos atemporales para entusiastas</p>
-        <a href="#" class="btn">Explorar</a>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Old Style</h1>
+            <p>Clásicos atemporales para verdaderos entusiastas</p>
+            <a href="#supra-section" class="btn">Explorar Modelos</a>
+        </div>
     </section>
 
+    <!-- Modelos Principales -->
     <section class="car-section" id="supra-section">
-        <img src="img/supra.jpg" alt="Toyota Supra" class="car-image">
-        <h2>Toyota Supra</h2>
-        <p>Ícono del tuning y la velocidad, un clásico japonés legendario.</p>
-        <button class="btn buy-btn">Comprar</button>
+        <div class="car-card">
+            <img src="img/supra.jpg" alt="Toyota Supra" class="car-image">
+            <h2>Toyota Supra</h2>
+            <p>Ícono del tuning y la velocidad, un clásico japonés legendario.</p>
+            <button class="btn buy-btn" data-car="Toyota Supra">Comprar</button>
+        </div>
     </section>
 
     <section class="car-section">
-        <img src="img/r34.jpg" alt="Nissan R34" class="car-image">
-        <h2>Nissan R34</h2>
-        <p>El rey de los Skyline, potencia y estilo en un solo paquete.</p>
-        <button class="btn buy-btn">Comprar</button>
+        <div class="car-card">
+            <img src="img/r34.jpg" alt="Nissan R34" class="car-image">
+            <h2>Nissan R34</h2>
+            <p>El rey de los Skyline, potencia y estilo en un solo paquete.</p>
+            <button class="btn buy-btn" data-car="Nissan R34">Comprar</button>
+        </div>
     </section>
 
     <section class="car-section">
-        <img src="img/accord.jpg" alt="Honda Accord Type R 1998-2002" class="car-image">
-        <h2>Honda Accord Type R 1998-2002</h2>
-        <p>Deportivo familiar con el alma de un Type R puro.</p>
-        <button class="btn buy-btn">Comprar</button>
+        <div class="car-card">
+            <img src="img/accord.jpg" alt="Honda Accord Type R 1998-2002" class="car-image">
+            <h2>Honda Accord Type R</h2>
+            <p>Deportivo familiar con el alma de un Type R puro.</p>
+            <button class="btn buy-btn" data-car="Honda Accord Type R">Comprar</button>
+        </div>
+    </section>
+
+    <!-- Banner de Segunda Mano -->
+    <div class="banner" id="second-hand-section">
+        <h2>Segunda Mano</h2>
+    </div>
+
+    <!-- Sección de Segunda Mano -->
+    <section class="car-section">
+        <div class="car-card">
+            <img src="img/renault4.jpg" alt="Renault 4" class="car-image">
+            <h2>Renault 4</h2>
+            <p>Un clásico económico y versátil, perfecto para cualquier aventura.</p>
+            <button class="btn buy-btn" data-car="Renault 4">Comprar</button>
+        </div>
+    </section>
+
+    <section class="car-section">
+        <div class="car-card">
+            <img src="img/twingo.jpeg" alt="Renault Twingo" class="car-image">
+            <h2>Renault Twingo</h2>
+            <p>Compacto, ágil y lleno de personalidad, ideal para la ciudad.</p>
+            <button class="btn buy-btn" data-car="Renault Twingo">Comprar</button>
+        </div>
     </section>
 
     <!-- Modal -->
     <div class="modal" id="buy-modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <p>Haga la transferencia a bitcoin:bc1qx3u4njquj0ux63030r4nat8awqrlm0x2zlt96h y el carro llegará a su puerta.</p>
+            <span class="close-btn">×</span>
+            <h3>Compra de <span id="car-name"></span></h3>
+            <p>Haga la transferencia a <strong>bitcoin:bc1qx3u4njquj0ux63030r4nat8awqrlm0x2zlt96h</strong> y el carro llegará a su puerta.</p>
         </div>
     </div>
+
+    <!-- Botón Volver Arriba -->
+    <button id="scroll-top" title="Volver arriba">↑</button>
 
     <footer>
         <p>© 2025 Old Style - Todos los derechos reservados</p>
     </footer>
 
     <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            document.getElementById('preloader').style.display = 'none';
+        });
+
+        // Modal
         const buyButtons = document.querySelectorAll('.buy-btn');
         const modal = document.getElementById('buy-modal');
         const closeBtn = document.querySelector('.close-btn');
+        const carNameSpan = document.getElementById('car-name');
 
         buyButtons.forEach(button => {
             button.addEventListener('click', () => {
-                modal.style.display = 'block';
+                const carName = button.getAttribute('data-car');
+                carNameSpan.textContent = carName;
+                modal.style.display = 'flex';
             });
         });
 
@@ -75,6 +131,20 @@
             if (event.target === modal) {
                 modal.style.display = 'none';
             }
+        });
+
+        // Scroll Top Button
+        const scrollTopBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.style.display = 'block';
+            } else {
+                scrollTopBtn.style.display = 'none';
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>

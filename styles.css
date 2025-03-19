@@ -9,12 +9,42 @@ html {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: #fff;
-    background-color: #222;
+    background-color: #1a1a1a;
+    overflow-x: hidden;
 }
 
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #fff;
+    border-top: 5px solid #8a2be2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Navegación */
 .nav {
     position: fixed;
     top: 0;
@@ -23,13 +53,30 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, #000, #2a0047);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    transition: all 0.3s ease;
 }
 
 .nav .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.nav .logo-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.nav .logo span {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    color: #8a2be2;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .nav ul {
@@ -42,85 +89,153 @@ body {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
 }
 
 .nav a:hover {
-    color: #ddd;
+    color: #8a2be2;
 }
 
+/* Hero */
 .hero {
     height: 100vh;
     background: url('img/fondo.webp') no-repeat center/cover;
+    position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    animation: zoomBackground 15s infinite alternate ease-in-out;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
     position: relative;
+    text-align: center;
+    z-index: 1;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+.hero-content h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 4.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: fadeIn 1.5s ease-in;
 }
 
-.hero p {
+.hero-content p {
+    font-size: 1.5rem;
+    margin: 1rem 0 2rem;
+    animation: fadeIn 1.5s ease-in 0.5s forwards;
+    opacity: 0;
+}
+
+.hero-content .btn {
     font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+    padding: 1rem 2.5rem;
+    background: #8a2be2;
+    border: none;
+    border-radius: 5px;
+    animation: fadeIn 1.5s ease-in 1s forwards;
+    opacity: 0;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.btn {
-    padding: 0.8rem 2rem;
-    border: 2px solid #fff;
-    background: transparent;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
+.hero-content .btn:hover {
+    background: #6a1bb2;
+    transform: translateY(-5px);
 }
 
-.btn:hover {
-    background: #fff;
-    color: #000;
-}
-
+/* Secciones de Carros */
 .car-section {
     min-height: 80vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 2rem;
+    background: linear-gradient(180deg, #1a1a1a, #2a0047);
+}
+
+.car-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 700px;
     text-align: center;
-    padding: 2rem 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-10px);
 }
 
 .car-image {
     width: 100%;
     max-width: 600px;
     height: auto;
-    margin-bottom: 1rem;
-    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    transition: opacity 0.3s ease;
+}
+
+.car-card:hover .car-image {
+    opacity: 0.9;
 }
 
 .car-section h2 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    color: #8a2be2;
+    margin-bottom: 0.75rem;
 }
 
 .car-section p {
-    font-size: 1rem;
-    max-width: 500px;
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 1.5rem;
 }
 
-footer {
-    background: #111;
-    padding: 1rem;
+.car-section .btn {
+    background: #8a2be2;
+    border: none;
+    border-radius: 5px;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.car-section .btn:hover {
+    background: #6a1bb2;
+    transform: scale(1.05);
+}
+
+/* Banner de Segunda Mano */
+.banner {
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(90deg, #2a0047, #8a2be2);
     text-align: center;
-    font-size: 0.9rem;
 }
 
-/* Estilos del Modal */
+.banner h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeIn 1s ease-in;
+}
+
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -128,31 +243,154 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     z-index: 2000;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
     background: #fff;
     color: #000;
-    margin: 15% auto;
     padding: 2rem;
-    border-radius: 10px;
-    width: 80%;
+    border-radius: 15px;
+    width: 90%;
     max-width: 500px;
     text-align: center;
-    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    animation: slideInModal 0.3s ease;
+}
+
+.modal-content h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.modal-content p {
+    font-size: 1rem;
+    color: #333;
 }
 
 .close-btn {
     position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.5rem;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
     cursor: pointer;
-    color: #000;
+    color: #555;
+    transition: color 0.3s ease;
 }
 
 .close-btn:hover {
-    color: #555;
+    color: #000;
+}
+
+/* Botón Volver Arriba */
+#scroll-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: #8a2be2;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#scroll-top:hover {
+    background: #6a1bb2;
+    transform: scale(1.1);
+}
+
+/* Footer */
+footer {
+    background: #000;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 2px solid #8a2be2;
+}
+
+/* Animaciones */
+@keyframes zoomBackground {
+    0% { background-size: 100%; }
+    100% { background-size: 115%; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInModal {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav ul {
+        margin-top: 1rem;
+        gap: 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+
+    .car-card {
+        padding: 1.5rem;
+    }
+
+    .car-section h2 {
+        font-size: 2rem;
+    }
+
+    .banner h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav .logo-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .nav .logo span {
+        font-size: 1.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .hero-content .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+
+    .banner h2 {
+        font-size: 2rem;
+    }
 }
